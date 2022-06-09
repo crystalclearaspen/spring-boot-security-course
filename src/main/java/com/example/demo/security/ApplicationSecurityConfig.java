@@ -32,8 +32,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and()
+//                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                .and()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/api/**").hasRole(STUDENT.name())
@@ -48,7 +49,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService() {
         UserDetails annaSmithUser = User.builder()
                 .username("annasmith")
-                .password(passwordEncoder.encode("password"))
+                .password(passwordEncoder.encode("password123"))
 //                .roles(STUDENT.name()) // ROLE_STUDENT
                 .authorities(STUDENT.getGrantedAuthorities())
                 .build();
